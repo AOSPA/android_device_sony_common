@@ -85,8 +85,8 @@ audio-hal := hardware/qcom/audio
 gps-hal := hardware/qcom/gps/msm8994
 
 ifeq ($(TARGET_KERNEL_VERSION),3.10)
-display-hal := hardware/qcom/display/msm8994
-media-hal := hardware/qcom/media/msm8974
+display-hal := hardware/qcom/display
+media-hal := hardware/qcom/media
 endif
 
 ifeq ($(TARGET_KERNEL_VERSION),3.18)
@@ -99,10 +99,10 @@ display-hal := hardware/qcom/display/msm8998
 media-hal := hardware/qcom/media/msm8998
 endif
 
-include $(display-hal)/Android.mk
+#include $(display-hal)/Android.mk
 include $(call all-makefiles-under,$(audio-hal))
 include $(call all-makefiles-under,$(gps-hal))
-include $(call all-makefiles-under,$(media-hal))
+#include $(call all-makefiles-under,$(media-hal))
 
 ifeq ($(BOARD_HAVE_BLUETOOTH_QCOM),true)
 ifneq ($(filter rhine,$(PRODUCT_PLATFORM)),)
