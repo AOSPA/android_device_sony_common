@@ -95,15 +95,15 @@ media-hal := hardware/qcom/media/msm8996
 endif
 
 ifeq ($(TARGET_KERNEL_VERSION),4.4)
-QCOM_MEDIA_ROOT := hardware/qcom/media/msm8998
-display-hal := hardware/qcom/display/msm8998
-media-hal := hardware/qcom/media/msm8998
+QCOM_MEDIA_ROOT := hardware/qcom/media
+display-hal := hardware/qcom/display
+media-hal := hardware/qcom/media
 endif
 
-include $(display-hal)/Android.mk
-include $(call all-makefiles-under,$(audio-hal))
+#include $(display-hal)/Android.mk
+#include $(call all-makefiles-under,$(audio-hal))
 include $(call all-makefiles-under,$(gps-hal))
-include $(call all-makefiles-under,$(media-hal))
+#include $(call all-makefiles-under,$(media-hal))
 
 ifeq ($(BOARD_HAVE_BLUETOOTH_QCOM),true)
 ifneq ($(filter rhine,$(PRODUCT_PLATFORM)),)
