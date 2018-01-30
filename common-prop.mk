@@ -141,7 +141,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # sdcardFS
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.sys.sdcardfs=true
+    ro.sys.sdcardfs=false
+
+# gapps
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.setupwizard.mode=DISABLED
 
 # RILD
 PRODUCT_PROPERTY_OVERRIDES += \
