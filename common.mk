@@ -73,55 +73,6 @@ endif
 #    device/sample/etc/old-apns-conf.xml:system/etc/old-apns-conf.xml \
 #    device/sample/etc/apns-full-conf.xml:system/etc/apns-conf.xml
 
-# TEMP FIX
-PRODUCT_PACKAGES += \
-    android.hidl.base@1.0 \
-    android.hidl.manager@1.0
-
-# Audio
-PRODUCT_PACKAGES += \
-    android.hardware.audio@2.0-impl \
-    android.hardware.audio@2.0-service
-
-# Biometric
-PRODUCT_PACKAGES += \
-    android.hardware.biometrics.fingerprint@2.1-service
-
-# BroadcastRadio
-PRODUCT_PACKAGES += \
-    android.hardware.broadcastradio@1.0-impl
-
-# Gatekeeper
-PRODUCT_PACKAGES += \
-    android.hardware.gatekeeper@1.0-impl \
-    android.hardware.gatekeeper@1.0-service
-
-# Hidl
-PRODUCT_PACKAGES += \
-    android.hidl.manager@1.0
-
-# Keymaster
-PRODUCT_PACKAGES += \
-    android.hardware.keymaster@3.0-impl \
-    android.hardware.keymaster@3.0-service
-
-# RenderScript
-PRODUCT_PACKAGES += \
-    android.hardware.renderscript@1.0-impl
-
-# Sensors
-PRODUCT_PACKAGES += \
-    android.hardware.sensors@1.0-impl \
-    android.hardware.sensors@1.0-service
-
-# USB
-PRODUCT_PACKAGES += \
-android.hardware.usb@1.0-service
-
-# WIFI
-PRODUCT_PACKAGES += \
-    android.hardware.wifi@1.0-service
-
 PRODUCT_CUSTOM_IMAGE_MAKEFILES := $(COMMON_PATH)/odm.mk
 
 $(call inherit-product, device/sony/common/common-init.mk)
