@@ -142,7 +142,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # sdcardFS
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.sys.sdcardfs=false
+    ro.sys.sdcardfs=true
 
 # gapps
 PRODUCT_PROPERTY_OVERRIDES += \
