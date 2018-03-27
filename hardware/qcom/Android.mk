@@ -23,5 +23,5 @@ include $(call all-makefiles-under,$(gps-hal))
 include $(call all-makefiles-under,$(media-hal))
 
 ifeq ($(BOARD_HAVE_BLUETOOTH_QCOM),true)
-  include $(call all-makefiles-under,hardware/qcom/bt/msm8998)
+include $(call all-makefiles-under,hardware/qcom/bt/msm8998)
 endif
