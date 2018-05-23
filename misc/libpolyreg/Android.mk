@@ -1,4 +1,4 @@
-# Copyright (C) 2014 The Android Open Source Project
+# Copyright (C) 2012 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,26 +12,22 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Common init services
-PRODUCT_PACKAGES += \
-    init.usb.rc \
-    adb_tcp.rc \
-    adsprpcd.rc \
-    cnss-daemon.rc \
-    irsc_util.rc \
-    mlog_qmi.rc \
-    msm_irq.rc \
-    netmgrd.rc \
-    pd_mapper.rc \
-    per-proxy.rc \
-    per-service.rc \
-    qmuxd.rc \
-    qseecom.rc \
-    rild2.rc \
-    rmt_storage.rc \
-    sct_service.rc \
-    sensors.rc \
-    tad.rc \
-    ta_qmi.rc \
-    tftp_server.rc \
-    wpa_supplicant.rc
+LOCAL_PATH := $(call my-dir)
+
+include $(CLEAR_VARS)
+LOCAL_COPY_HEADERS_TO := libpolyreg
+LOCAL_COPY_HEADERS := ./polyreg.h
+include $(BUILD_COPY_HEADERS)
+
+include $(CLEAR_VARS)
+LOCAL_SRC_FILES := polyreg.c
+LOCAL_SHARED_LIBRARIES := \
+    libcutils \
+    liblog
+
+LOCAL_MODULE := libpolyreg
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_OWNER := sony
+LOCAL_PROPRIETARY_MODULE := true
+
+include $(BUILD_SHARED_LIBRARY)
