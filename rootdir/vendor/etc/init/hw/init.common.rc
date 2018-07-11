@@ -62,6 +62,24 @@ on init
     # Load persistent dm-verity state
     verity_load_state
 
+    # cpuquiet rqbalance permissions
+    chown system system /sys/devices/system/cpu/cpuquiet/nr_min_cpus
+    chown system system /sys/devices/system/cpu/cpuquiet/nr_power_max_cpus
+    chown system system /sys/devices/system/cpu/cpuquiet/nr_thermal_max_cpus
+    chown system system /sys/devices/system/cpu/cpuquiet/rqbalance/balance_level
+    chown system system /sys/devices/system/cpu/cpuquiet/rqbalance/nr_run_thresholds
+    chown system system /sys/devices/system/cpu/cpuquiet/rqbalance/nr_down_run_thresholds
+    chown system system /sys/devices/system/cpu/cpuquiet/rqbalance/cluster_freq_vote_max
+    chown system system /sys/devices/system/cpu/cpuquiet/rqbalance/cluster_freq_vote_min
+    chmod 0660 /sys/devices/system/cpu/cpuquiet/nr_min_cpus
+    chmod 0660 /sys/devices/system/cpu/cpuquiet/nr_power_max_cpus
+    chmod 0660 /sys/devices/system/cpu/cpuquiet/nr_thermal_max_cpus
+    chmod 0660 /sys/devices/system/cpu/cpuquiet/rqbalance/balance_level
+    chmod 0660 /sys/devices/system/cpu/cpuquiet/rqbalance/nr_run_thresholds
+    chmod 0660 /sys/devices/system/cpu/cpuquiet/rqbalance/nr_down_run_thresholds
+    chmod 0660 /sys/devices/system/cpu/cpuquiet/rqbalance/cluster_freq_vote_max
+    chmod 0660 /sys/devices/system/cpu/cpuquiet/rqbalance/cluster_freq_vote_min
+
 on fs
     mount_all /vendor/etc/fstab.${ro.hardware}
 
@@ -242,6 +260,7 @@ on boot
     chown system graphics /sys/devices/mdss_dsi_panel/pcc_profile
     chmod 0664 /sys/devices/mdss_dsi_panel/pcc_profile
 
+    # FB1 permissions
     chown system graphics /sys/class/graphics/fb1/avi_itc
     chown system graphics /sys/class/graphics/fb1/avi_cn0_1
     chown system graphics /sys/class/graphics/fb1/hpd
@@ -259,7 +278,9 @@ on boot
 
     # FB2 permissions
     chown system graphics /sys/class/graphics/fb2/ad
+    chown system graphics /sys/class/graphics/fb2/hpd
     chmod 0664 /sys/class/graphics/fb2/ad
+    chmod 0664 /sys/class/graphics/fb2/hpd
 
     # For bridgemgr daemon to inform the USB driver of the correct transport
     chown radio radio /sys/class/android_usb/f_rmnet_smd_sdio/transport
