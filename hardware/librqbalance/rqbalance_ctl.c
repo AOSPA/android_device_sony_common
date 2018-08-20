@@ -19,6 +19,7 @@
 #include <errno.h>
 #include <fcntl.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include <string.h>
 
 #include <sys/types.h>
@@ -29,7 +30,7 @@
 #include <cutils/android_filesystem_config.h>
 #include <hardware/hardware.h>
 #include <hardware/power.h>
-#include <utils/Log.h>
+#include <log/log.h>
 
 #define POWERSERVER_SOCKET		"/dev/socket/powerhal/rqbsvr"
 
@@ -44,7 +45,7 @@ struct rqbalance_halext_params {
 
 static int send_powerserver_data(struct rqbalance_halext_params params)
 {
-	register int sock, recvsock;
+	register int sock;
 	int ret, len = sizeof(struct sockaddr_un);
 	int32_t halext_reply;
 	fd_set receivefd;
