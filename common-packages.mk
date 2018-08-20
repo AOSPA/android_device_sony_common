@@ -125,6 +125,10 @@ PRODUCT_PACKAGES += \
 # Charger
 PRODUCT_PACKAGES += \
     charger_res_images
+	
+# Thermal
+PRODUCT_PACKAGES += \
+    thermal.default
 
 # AOSP Packages
 PRODUCT_PACKAGES += \
