@@ -126,3 +126,6 @@ $(call inherit-product, device/sony/common/common-treble.mk)
 
 # Include perf and iop blobs
 -include vendor/qcom/common/qti-vendor.mk
+
+# Widevine DRM
+$(call inherit-product-if-exists, vendor/sony/widevine/widevine.mk)
