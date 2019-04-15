@@ -276,6 +276,10 @@ on boot
     chown radio radio /data/vendor/radio/copy_complete
     chmod 0660 /data/vendor/radio/copy_complete
 
+    # RIL Start Daemon
+    start ril-daemon
+    start vendor.ril-daemon
+
     # File flags for prebuilt ril db file
     write /data/vendor/radio/prebuilt_db_support 1
     chown radio radio /data/vendor/radio/prebuilt_db_support
