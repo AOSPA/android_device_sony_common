@@ -127,5 +127,10 @@ $(call inherit-product, device/sony/common/common-treble.mk)
 # Include perf and iop blobs
 -include vendor/qcom/common/qti-vendor.mk
 
+# whitelisted app
+PRODUCT_COPY_FILES += \
+    $(COMMON_PATH)/qti_whitelist.xml:system/etc/sysconfig/qti_whitelist.xml
+
 # Widevine DRM
 $(call inherit-product-if-exists, vendor/sony/widevine/widevine.mk)
+
