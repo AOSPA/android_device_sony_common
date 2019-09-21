@@ -125,11 +125,34 @@ $(call inherit-product, device/sony/common/common-prop.mk)
 $(call inherit-product, device/sony/common/common-treble.mk)
 
 # Include perf and iop blobs
--include vendor/qcom/common/qti-vendor.mk
+#include vendor/qcom/common/qti-vendor.mk
 
 # whitelisted app
 PRODUCT_COPY_FILES += \
-    $(COMMON_PATH)/qti_whitelist.xml:system/etc/sysconfig/qti_whitelist.xml
+    $(COMMON_PATH)/qti_whitelist.xml:system/etc/sysconfig/qti_whitelist.xml \
+	$(COMMON_PATH)/privapp-permissions-qti.xml:system/etc/sysconfig/privapp-permissions-qti.xml
+
+#skip boot jars check
+SKIP_BOOT_JARS_CHECK := true
+
+# IMS
+PRODUCT_PACKAGES += \
+    ims-ext-common \
+    ims_ext_common.xml
+
+HIDL_WRAPPER := qti-telephony-hidl-wrapper
+HIDL_WRAPPER += qti_telephony_hidl_wrapper.xml
+
+QTI_TELEPHONY_UTILS := qti-telephony-utils
+QTI_TELEPHONY_UTILS += qti_telephony_utils.xml
+
+PRODUCT_PACKAGES += $(HIDL_WRAPPER)
+PRODUCT_PACKAGES += $(QTI_TELEPHONY_UTILS)
+
+PRODUCT_PACKAGES += libvndfwk_detect_jni.qti
+PRODUCT_PACKAGES += libqti_vndfwk_detect
+PRODUCT_PACKAGES += libvndfwk_detect_jni.qti.vendor
+PRODUCT_PACKAGES += libqti_vndfwk_detect.vendor
 
 # Widevine DRM
 $(call inherit-product-if-exists, vendor/sony/widevine/widevine.mk)

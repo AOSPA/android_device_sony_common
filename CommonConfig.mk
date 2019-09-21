@@ -22,7 +22,7 @@ TARGET_USES_AOSP := true
 
 TARGET_BOARD_AUTO := true
 
-TARGET_COMPILE_WITH_MSM_KERNEL := true
+#TARGET_COMPILE_WITH_MSM_KERNEL := true
 TARGET_KERNEL_SOURCE := kernel/sony/msm-4.9/kernel
 
 TARGET_NO_RADIOIMAGE := true
@@ -143,3 +143,5 @@ endif
 ifeq ($(AB_OTA_UPDATER),true)
 DEVICE_MANIFEST_FILE += $(COMMON_PATH)/vintf/android.hardware.bootctrl.xml
 endif
+
+BUILD_BROKEN_DUP_RULES := true
