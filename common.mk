@@ -29,25 +29,24 @@ SONY_BUILD_SYMLINKS := $(COMMON_PATH)/sony_build_symlinks.mk
 
 DEVICE_PACKAGE_OVERLAYS += $(COMMON_PATH)/overlay
 
-PRODUCT_ENFORCE_RRO_TARGETS := \
-    Bluetooth \
-    Settings \
-    SettingsProvider \
-    SystemUI \
-    Telephony \
-    framework-res
-
-PRODUCT_USE_VNDK_OVERRIDE := true
+PRODUCT_ENFORCE_RRO_TARGETS := *
 
 PRODUCT_DEXPREOPT_SPEED_APPS += SystemUI
 
-PRODUCT_ENFORCE_VINTF_MANIFEST_OVERRIDE := true
+# Treble properties
 
+# Match running HAL services against vintf manifest
+PRODUCT_ENFORCE_VINTF_MANIFEST_OVERRIDE := true
+# Force using VNDK regardless of shipping API level
+PRODUCT_USE_VNDK_OVERRIDE := true
 # Force split of sepolicy into /system/etc/selinux and (/system)/vendor/etc/selinux
 # for all devices, regardless of shipping API level
 PRODUCT_SEPOLICY_SPLIT_OVERRIDE := true
 # Force moving all vendor props into /vendor/build.prop
 BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
+
+# Force building a recovery image: Needed for OTA packaging to work since Q
+PRODUCT_BUILD_RECOVERY_IMAGE := true
 
 BUILD_KERNEL := true
 -include $(KERNEL_PATH)/common-headers/KernelHeaders.mk

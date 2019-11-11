@@ -33,9 +33,15 @@ PRODUCT_PACKAGES += \
     android.hardware.soundtrigger@2.1-impl:32
 
 # Camera
+ifeq ($(TARGET_USES_64BIT_CAMERA),true)
+PRODUCT_PACKAGES += \
+    android.hardware.camera.provider@2.4-impl:64 \
+    android.hardware.camera.provider@2.4-service_64
+else
 PRODUCT_PACKAGES += \
     android.hardware.camera.provider@2.4-impl:32 \
     android.hardware.camera.provider@2.4-service
+endif
 
 # Wi-Fi
 PRODUCT_PACKAGES += \
@@ -72,43 +78,33 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.biometrics.fingerprint@2.1-service.sony
 
+# Gatekeeper passthrough service
+PRODUCT_PACKAGES += \
+    android.hardware.gatekeeper@1.0-service
+
 ifeq ($(TARGET_LEGACY_KEYMASTER),true)
 # Keymaster
 PRODUCT_PACKAGES += \
     android.hardware.keymaster@3.0-impl \
     android.hardware.keymaster@3.0-service
-
-# Gatekeeper
+# Gatekeeper libhardware module passthrough
 PRODUCT_PACKAGES += \
-    android.hardware.gatekeeper@1.0-impl \
-    android.hardware.gatekeeper@1.0-service
+    android.hardware.gatekeeper@1.0-impl
 else ifeq ($(TARGET_KEYMASTER_V4),true)
-# Keymaster 4
+# Keymaster 4 passthrough service
 PRODUCT_PACKAGES += \
     android.hardware.keymaster@4.0-service-qti
-
-# Gatekeeper
-PRODUCT_PACKAGES += \
-    android.hardware.gatekeeper@1.0-impl-qti \
-    android.hardware.gatekeeper@1.0-service-qti
 else
-# Keymaster
+# Keymaster 3 passthrough service
 PRODUCT_PACKAGES += \
-    android.hardware.keymaster@3.0-impl-qti \
-    android.hardware.keymaster@3.0-service-qti
-
-# Gatekeeper
-PRODUCT_PACKAGES += \
-    android.hardware.gatekeeper@1.0-impl-qti \
-    android.hardware.gatekeeper@1.0-service-qti
+    android.hardware.keymaster@3.0-service
 endif
 
 # DRM
 PRODUCT_PACKAGES += \
     android.hardware.drm@1.0-impl \
     android.hardware.drm@1.0-service \
-    android.hardware.drm@1.2-service.clearkey \
-    android.hardware.drm@1.1-service.widevine
+    android.hardware.drm@1.2-service.clearkey
 
 ifneq ($(BOARD_USE_LEGACY_USB),true)
 # Usb HAL
