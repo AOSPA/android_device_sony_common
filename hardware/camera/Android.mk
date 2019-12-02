@@ -11,21 +11,11 @@ LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR)
 
 library_names := \
     camera \
-    hw/camera.qcom.so \
-    hw/com.qti.chi.override.so \
-    libcamxfdalgov7.so \
-    libcamxfdengine.so \
-    libcamxstatscore.so \
-    libcamxtintlessalgo.so \
-    libcom.qti.chinodeutils.so
 
 # Create symlinks to 64-bit camera libraries:
 SONY_SYMLINKS := $(foreach p,$(library_names), \
     /odm/lib64/$p:$(TARGET_COPY_OUT_VENDOR)/lib64/$p \
 )
-
-# Special exception for camera.qcom.so that is also linked to as camera.$(TARGET_BOARD_PLATFORM).so:
-SONY_SYMLINKS += /odm/lib64/hw/camera.qcom.so:$(TARGET_COPY_OUT_VENDOR)/lib64/hw/camera.$(TARGET_BOARD_PLATFORM).so
 
 include $(SONY_BUILD_SYMLINKS)
 
