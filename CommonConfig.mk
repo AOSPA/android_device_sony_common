@@ -46,8 +46,6 @@ BOARD_MKBOOTIMG_ARGS := --ramdisk_offset $(BOARD_RAMDISK_OFFSET) --tags_offset $
 
 TARGET_KERNEL_ARCH := arm64
 TARGET_KERNEL_HEADER_ARCH := arm64
-TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
-TARGET_KERNEL_CROSS_COMPILE_32BITS_PREFIX := arm-linux-androideabi-
 BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
 
 # Use mke2fs to create ext4 images
@@ -77,6 +75,12 @@ NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
 TARGET_USES_COLOR_METADATA := true
 TARGET_USES_HWC2 := true
 TARGET_USES_DISPLAY_RENDER_INTENTS := true
+
+ifeq ($(TARGET_USES_GRALLOC1),true)
+SOONG_CONFIG_NAMESPACES += gralloc
+SOONG_CONFIG_gralloc := use_v1
+SOONG_CONFIG_gralloc_use_v1 := true
+endif
 
 # Audio
 BOARD_USES_ALSA_AUDIO := true
@@ -154,3 +158,5 @@ endif
 # New vendor security patch level: https://r.android.com/660840/
 # Used by newer keymaster binaries
 VENDOR_SECURITY_PATCH=$(PLATFORM_SECURITY_PATCH)
+
+TARGET_USES_IMS:= true
