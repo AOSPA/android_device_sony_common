@@ -24,6 +24,15 @@ include $(BUILD_PREBUILT)
 endif # $(TARGET_KEYMASTER_V4) == true
 
 include $(CLEAR_VARS)
+LOCAL_MODULE := init.qcom.modem.sh
+LOCAL_MODULE_CLASS := EXECUTABLES
+LOCAL_SRC_FILES_arm64 := vendor/bin/init.qcom.modem.sh
+LOCAL_INIT_RC_64  := vendor/etc/init/init.modem.rc
+LOCAL_MODULE_TARGET_ARCH := arm64
+LOCAL_VENDOR_MODULE := true
+include $(BUILD_PREBUILT)
+
+include $(CLEAR_VARS)
 LOCAL_MODULE := init.qcom.slpistart.sh
 LOCAL_MODULE_CLASS := EXECUTABLES
 LOCAL_SRC_FILES_arm64 := vendor/bin/init.qcom.slpistart.sh
@@ -94,6 +103,15 @@ LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR)/etc/init
 include $(BUILD_PREBUILT)
 
+ifeq ($(TARGET_NEEDS_AUDIOPD), true)
+include $(CLEAR_VARS)
+LOCAL_MODULE := audiopd.rc
+LOCAL_MODULE_CLASS := ETC
+LOCAL_SRC_FILES := vendor/etc/init/audiopd.rc
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR)/etc/init
+include $(BUILD_PREBUILT)
+endif
 
 include $(CLEAR_VARS)
 LOCAL_MODULE := ipacm.rc
@@ -202,9 +220,33 @@ LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR)/etc/init
 include $(BUILD_PREBUILT)
 
 include $(CLEAR_VARS)
+LOCAL_MODULE := dpmQmiMgr.rc
+LOCAL_MODULE_CLASS := ETC
+LOCAL_SRC_FILES := vendor/etc/init/dpmQmiMgr.rc
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR)/etc/init
+include $(BUILD_PREBUILT)
+
+include $(CLEAR_VARS)
 LOCAL_MODULE := qseecom.rc
 LOCAL_MODULE_CLASS := ETC
 LOCAL_SRC_FILES := vendor/etc/init/qseecom.rc
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR)/etc/init
+include $(BUILD_PREBUILT)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := qcrild.rc
+LOCAL_MODULE_CLASS := ETC
+LOCAL_SRC_FILES := vendor/etc/init/qcrild.rc
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR)/etc/init
+include $(BUILD_PREBUILT)
+
+include $(CLEAR_VARS)
+LOCAL_MODULE := qcrild2.rc
+LOCAL_MODULE_CLASS := ETC
+LOCAL_SRC_FILES := vendor/etc/init/qcrild2.rc
 LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR)/etc/init
 include $(BUILD_PREBUILT)
@@ -241,6 +283,15 @@ LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR)/etc/init
 include $(BUILD_PREBUILT)
 
+ifeq ($(TARGET_USES_TAD_V2), true)
+include $(CLEAR_VARS)
+LOCAL_MODULE := tad.rc
+LOCAL_MODULE_CLASS := ETC
+LOCAL_SRC_FILES := vendor/etc/init/tad2.rc
+LOCAL_MODULE_TAGS := optional
+LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR)/etc/init
+include $(BUILD_PREBUILT)
+else
 include $(CLEAR_VARS)
 LOCAL_MODULE := tad.rc
 LOCAL_MODULE_CLASS := ETC
@@ -248,6 +299,7 @@ LOCAL_SRC_FILES := vendor/etc/init/tad.rc
 LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE_PATH := $(TARGET_OUT_VENDOR)/etc/init
 include $(BUILD_PREBUILT)
+endif
 
 include $(CLEAR_VARS)
 LOCAL_MODULE := ta_qmi.rc

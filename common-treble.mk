@@ -4,8 +4,8 @@ PRODUCT_PACKAGES += \
 
 # Composer
 PRODUCT_PACKAGES += \
-    android.hardware.graphics.composer@2.1-impl:64 \
-    android.hardware.graphics.composer@2.1-service \
+    android.hardware.graphics.composer@2.3-impl:64 \
+    android.hardware.graphics.composer@2.3-service \
 
 # Graphics allocator/mapper
 ifeq ($(TARGET_HARDWARE_GRAPHICS_V3),true)
@@ -38,7 +38,8 @@ PRODUCT_PACKAGES += \
 # RIL
 # Interface library needed by odm blobs:
 PRODUCT_PACKAGES += \
-    android.hardware.radio.config@1.0 \
+    android.hardware.radio@1.4 \
+    android.hardware.radio.config@1.2 \
     android.hardware.secure_element@1.0
 
 # Audio

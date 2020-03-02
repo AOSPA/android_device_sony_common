@@ -16,9 +16,8 @@
 # Might be temporary! See:
 # https://android.googlesource.com/platform/build/soong/+/master/README.md#name-resolution
 PRODUCT_SOONG_NAMESPACES += \
-    $(PLATFORM_COMMON_PATH)
-
-$(call inherit-product-if-exists, device/sony/customization/customization.mk)
+    $(PLATFORM_COMMON_PATH) \
+    vendor/qcom/opensource/core-utils
 
 # Common path
 COMMON_PATH := device/sony/common
@@ -33,17 +32,19 @@ PRODUCT_ENFORCE_RRO_TARGETS := *
 
 PRODUCT_DEXPREOPT_SPEED_APPS += SystemUI
 
-# Treble properties
+# Force using the following regardless of shipping API level:
+#   PRODUCT_TREBLE_LINKER_NAMESPACES
+#   PRODUCT_SEPOLICY_SPLIT
+#   PRODUCT_ENFORCE_VINTF_MANIFEST
+#   PRODUCT_NOTICE_SPLIT
+PRODUCT_FULL_TREBLE_OVERRIDE := true
 
-# Match running HAL services against vintf manifest
-PRODUCT_ENFORCE_VINTF_MANIFEST_OVERRIDE := true
+# VNDK
 # Force using VNDK regardless of shipping API level
 PRODUCT_USE_VNDK_OVERRIDE := true
-# Force split of sepolicy into /system/etc/selinux and (/system)/vendor/etc/selinux
-# for all devices, regardless of shipping API level
-PRODUCT_SEPOLICY_SPLIT_OVERRIDE := true
-# Force moving all vendor props into /vendor/build.prop
-BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
+# Include vndk/vndk-sp/ll-ndk modules
+PRODUCT_PACKAGES += \
+    vndk_package
 
 # Force building a recovery image: Needed for OTA packaging to work since Q
 PRODUCT_BUILD_RECOVERY_IMAGE := true
@@ -60,6 +61,15 @@ PRODUCT_COPY_FILES += \
 # Common etc
 PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/rootdir/system/etc/nfcee_access.xml:system/etc/nfcee_access.xml
+
+# GPS Configuration
+PRODUCT_COPY_FILES += \
+    $(COMMON_PATH)/rootdir/vendor/etc/gps.conf:$(TARGET_COPY_OUT_VENDOR)/etc/gps.conf
+
+
+# QMI Configuration
+PRODUCT_COPY_FILES += \
+    $(COMMON_PATH)/rootdir/vendor/etc/qmi_fw.conf:$(TARGET_COPY_OUT_VENDOR)/etc/qmi_fw.conf
 
 # Sensors common
 PRODUCT_COPY_FILES += \
@@ -112,10 +122,11 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     firmware_folders
 
-# APN list
-#PRODUCT_COPY_FILES += \
-#    device/sample/etc/old-apns-conf.xml:system/etc/old-apns-conf.xml \
-#    device/sample/etc/apns-full-conf.xml:system/etc/apns-conf.xml
+# Community APN list
+PRODUCT_COPY_FILES += \
+    $(COMMON_PATH)/rootdir/vendor/etc/apns-conf.xml:system/etc/apns-conf.xml
+
+-include device/sony/customization/customization.mk
 
 $(call inherit-product, device/sony/common/common-init.mk)
 $(call inherit-product, device/sony/common/common-odm.mk)

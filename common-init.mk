@@ -17,9 +17,11 @@ PRODUCT_PACKAGES += \
     init.usb.rc \
     adb_tcp.rc \
     adsprpcd.rc \
+    audiopd.rc \
     cdsprpcd.rc \
     cnss-daemon.rc \
     ipacm.rc \
+    dpmQmiMgr.rc \
     imsdatadaemon.rc \
     imsqmidaemon.rc \
     imsrcsd.rc \
@@ -34,7 +36,6 @@ PRODUCT_PACKAGES += \
     qmuxd.rc \
     qrtr.rc \
     qseecom.rc \
-    rild2.rc \
     rmt_storage.rc \
     sct_service.rc \
     sensors.rc \
@@ -44,8 +45,19 @@ PRODUCT_PACKAGES += \
     tftp_server.rc \
     wpa_supplicant.rc
 
+# RIL
+ifeq ($(TARGET_USE_QCRILD),true)
+PRODUCT_PACKAGES += \
+    qcrild.rc \
+    qcrild2.rc
+else
+PRODUCT_PACKAGES += \
+    rild2.rc
+endif
+
 # Common init scripts
 PRODUCT_PACKAGES += \
+    init.qcom.modem.sh \
     init.qcom.adspstart.sh \
     init.qcom.cdspstart.sh \
     init.qcom.ipastart.sh \

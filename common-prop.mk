@@ -70,19 +70,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     debug.hwui.use_buffer_age=false
 
-# Hardware User Interface parameters
+# Stagefright
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.hwui.texture_cache_size=48 \
-    ro.hwui.layer_cache_size=32 \
-    ro.hwui.r_buffer_cache_size=4 \
-    ro.hwui.path_cache_size=24 \
-    ro.hwui.gradient_cache_size=1 \
-    ro.hwui.drop_shadow_cache_size=5 \
-    ro.hwui.texture_cache_flushrate=0.5 \
-    ro.hwui.text_small_cache_width=1024 \
-    ro.hwui.text_small_cache_height=1024 \
-    ro.hwui.text_large_cache_width=2048 \
-    ro.hwui.text_large_cache_height=1024
+    media.stagefright.thumbnail.prefer_hw_codecs=true
 
 # Delay reduction
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -158,9 +148,15 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.bt.bdaddr_path=/data/vendor/bluetooth/bluetooth_bdaddr
 
 # RILD
+ifeq ($(TARGET_USE_QCRILD),true)
+PRODUCT_PROPERTY_OVERRIDES += \
+    vendor.rild.libpath=/odm/lib64/libril-qc-hal-qmi.so \
+    ril.subscription.types=NV,RUIM
+else
 PRODUCT_PROPERTY_OVERRIDES += \
     vendor.rild.libpath=/odm/lib64/libril-qc-qmi-1.so \
     ril.subscription.types=NV,RUIM
+endif
 
 # OpenGLES version
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -177,6 +173,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Perform color transform on the client
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.hwc2.skip_client_color_transform=false
+
+# Avoid Adoptable double encryption
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.crypto.allow_encrypt_override=true
 
 # Keymaster version to differentiate between legacy, v3 and v4
 ifeq ($(TARGET_LEGACY_KEYMASTER),true)
