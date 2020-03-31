@@ -49,7 +49,8 @@ PRODUCT_PACKAGES += \
 # Force building a recovery image: Needed for OTA packaging to work since Q
 PRODUCT_BUILD_RECOVERY_IMAGE := true
 
-BUILD_KERNEL := true
+KERNEL_PATH := kernel/sony/msm-$(SOMC_KERNEL_VERSION)
+# Sanitized prebuilt kernel headers
 -include $(KERNEL_PATH)/common-headers/KernelHeaders.mk
 
 # Codecs Configuration
@@ -70,10 +71,6 @@ PRODUCT_COPY_FILES += \
 # QMI Configuration
 PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/rootdir/vendor/etc/qmi_fw.conf:$(TARGET_COPY_OUT_VENDOR)/etc/qmi_fw.conf
-
-# Sensors common
-PRODUCT_COPY_FILES += \
-    $(COMMON_PATH)/rootdir/vendor/etc/sensors/sensors_settings:$(TARGET_COPY_OUT_VENDOR)/etc/sensors/sensors_settings
 
 # QMI
 PRODUCT_COPY_FILES += \

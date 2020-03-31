@@ -93,6 +93,8 @@ BOARD_QTI_CAMERA_32BIT_ONLY := true
 BOARD_QTI_CAMERA_V2 := true
 CAMERA_DAEMON_NOT_PRESENT := true
 
+USE_SENSOR_MULTI_HAL := true
+
 # GPS definitions for Qualcomm solution
 BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := $(TARGET_BOARD_PLATFORM)
 BOARD_VENDOR_QCOM_LOC_PDK_FEATURE_SET := true
@@ -118,7 +120,22 @@ ifeq ($(HOST_OS),linux)
 endif
 WITH_DEXPREOPT_BOOT_IMG_AND_SYSTEM_SERVER_ONLY ?= true
 
+# Build kernel using kernel's Android.mk file.
+# May be overriden by KernelConfig.mk if prebuilt kernel present.
+# Can also be turned off in Customization.mk in case it is desired to use a
+# custom ROM's kernel build system, e.g. LineageOS' or PE's.
+BUILD_KERNEL ?= true
+
 -include $(KERNEL_PATH)/common-kernel/KernelConfig.mk
+
+ifeq ($(TARGET_NEEDS_DTBOIMAGE),true)
+ifeq ($(BUILD_KERNEL),true)
+BOARD_DTBO_IMAGE_NAME := dtbo-$(TARGET_DEVICE).img
+BOARD_PREBUILT_DTBOIMAGE ?= $(PRODUCT_OUT)/$(BOARD_DTBO_IMAGE_NAME)
+else
+BOARD_PREBUILT_DTBOIMAGE ?= kernel/sony/msm-$(SOMC_KERNEL_VERSION)/common-kernel/dtbo-$(TARGET_DEVICE).img
+endif
+endif
 
 # Include build helpers for QCOM proprietary
 -include vendor/qcom/proprietary/common/build/proprietary-build.mk

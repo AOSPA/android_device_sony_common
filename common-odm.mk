@@ -1,5 +1,5 @@
 # Vendor version
-TARGET_VENDOR_VERSION := v4
+TARGET_VENDOR_VERSION := v5
 
 ifneq (,$(SONY_BUILD_ODM))
 
@@ -71,15 +71,7 @@ PRODUCT_PACKAGES += \
     libsnsapi \
     libsensor_reg  \
     libsensor1 \
-    sensors.msm8226 \
-    sensors.msm8974 \
-    sensors.msm8952 \
-    sensors.msm8994 \
-    sensors.msm8996 \
-    sensors.msm8998 \
-    sensors.sdm660 \
-    sensors.sdm845 \
-    sensors.sm8150 \
+    sensors.ssc \
     sensors.qcom
 
 # Data
