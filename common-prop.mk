@@ -52,6 +52,19 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.vendor.radio.apm_sim_not_pwdn=1 \
     persist.vendor.radio.oem_socket=false
 
+# IMS
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.vendor.radio.vdp_on_ims_cap=1 \
+    persist.vendor.radio.report_codec=1
+
+# Modem properties
+PRODUCT_PROPERTY_OVERRIDES +=
+    persist.vendor.radio.wait_for_pbm=1 \
+    persist.vendor.radio.mt_sms_ack=19 \
+    persist.vendor.radio.enableadvancedscan=true \
+    persist.vendor.radio.unicode_op_names=true \
+    persist.vendor.radio.sib16_support=1
+
 # Ringer
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.telephony.call_ring.multiple=false
